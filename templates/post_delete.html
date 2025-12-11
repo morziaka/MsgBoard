@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title%}
+{{create_or_edit}}
+{% endblock title %}}
+
+{% block content %}
+<h1>{{create_or_edit}}</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем "{{ post.title }}"?</p>
+    <input class = "btn btn-danger" type="submit" value="Удалить" />
+</form>
+{% endblock content %}

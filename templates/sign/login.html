@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title%}
+Вход в систему
+{% endblock title %}}
+
+{% block content %}
+<div>
+<h4>Вход в систему</h4>
+<form action = "{% url 'login' %}" method = "post" class = "filter-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class = "btn btn-success btn-sm" type = "submit" value = "Войти">
+</form>
+</div>
+{% endblock content %}

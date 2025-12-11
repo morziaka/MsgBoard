@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title%}
+Профиль пользователя
+{% endblock title %}}
+
+{% block content %}
+<div class = "container mt-5 d-flex justify-content-center">
+    <div>
+<h4>Страница авторизованного пользователя <br>
+    {{user.username}} </h4>
+        <a href = "{% url 'confirm_logout' %}" class = "btn btn-success" >Выйти</a>
+        <br>
+
+        <a href = "{% url 'post_create' %}" class = "btn btn-outline-primary mt-2">Добавить объявление</a>
+
+
+</div>
+
+</div>
+{% endblock content %}

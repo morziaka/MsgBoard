@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title%}
+{{create_or_edit}}
+{% endblock title %}}
+
+{% block content %}
+<h1>{{create_or_edit}}</h1>
+<hr>
+<div width="50%">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input class="btn btn-dark" type="submit" value="Сохранить" />
+</form>
+    </div>
+{% endblock content %}

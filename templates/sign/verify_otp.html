@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title%}
+Подтверждение кода
+{% endblock title %}}
+
+{% block content %}
+<div class = "container mt-5 d-flex justify-content-center">
+<form method="post">
+    {% csrf_token %}
+    <p><input type="text" name="email_otp" placeholder="Email OTP" required></p>
+    <input class = "btn btn-success" type = "submit" value = "Подтвердить">
+</form>
+
+</div>
+{% endblock content %}

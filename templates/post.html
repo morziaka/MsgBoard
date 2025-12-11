@@ -1,0 +1,64 @@
+{% extends 'flatpages/default.html' %}
+
+
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+<div>
+<h1>{{ post.title }} </h1>
+<p><i>Автор: {{post.author.username}}</i></p>
+<p>{{post.time_post}}</p>
+<p>Категория: {{post.categories}}</p>
+<p>{{post.content | safe}}</p><br>
+</div>
+
+<div>
+{% if request.user == post.author %}
+<a class="btn btn-success" href = "{% url 'post_update' post.id%}">редактировать</a>
+<a class="btn btn-danger" href = "{% url 'post_delete' post.id %}">удалить</a>
+{% endif %}
+</div>
+<br>
+<div>
+<a class="btn btn-outline-primary btn-sm mt-2" href="{% url 'reply_create' post.id %}">Оставить отклик</a>
+
+</div>
+<br>
+<hr>
+<h3>Отклики:</h3>
+{% if replies %}
+    {% for rep in replies %}
+
+            {% if rep.status == 1 %}
+            <div class = 'shadow-lg border-0 rounded-4 text-center' width="50%">
+                <h5>Пользователь: {{rep.author}}</h5>
+                <p><i>{{ rep.time_reply }}</i></p>
+                <p>{{ rep.text_reply }} </p>
+            </div>
+            {% elif rep.status == 0 %}
+                {% if request.user == post.author %}
+                    <div class ='shadow-lg border-0 rounded-4 text-center' width="30%">
+                        <h5>Пользователь: {{rep.author}}</h5>
+                        <p><i>{{ rep.time_reply }}</i></p>
+                        <p>{{ rep.text_reply }} </p>
+                        <p><a class="btn btn-success" href="{% url 'response_accept' post_id=post.id reply_id=rep.id %}">Принять</a>
+                            <a class="btn btn-danger" href="{% url 'response_reject' post_id=post.id reply_id=rep.id %}">Отклонить</a></p>
+                    </div>
+                {% else %}
+                        <p>Отклик на модерации.</p>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+
+{% else %}
+    <div class="col-lg-6">
+        <p class="card-text">Откликов пока нет.</p>
+    </div>
+{% endif %}
+
+{% endblock content %}

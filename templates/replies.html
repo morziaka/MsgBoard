@@ -1,0 +1,59 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Отклики
+{% endblock title %}
+
+
+{% block content %}
+<hr>
+{% if posts %}
+        <h4>МОИ ОБЪЯВЛЕНИЯ</h4>
+    <form action="" method="get">
+
+       {{ filterset.form.as_p }}
+
+       <input class="btn btn-success" type="submit" value="Найти" />
+     </form>
+
+<br>
+<hr>
+<h3>Отклики:</h3>
+
+    {% if replies %}
+
+        {% for rep in replies %}
+            {% for post in posts %}
+            {% if rep.reply == post %}
+                {% if rep.status == 1 %}
+                <div class = 'shadow-lg border-0 rounded-4 text-center'  >
+                    <h5>Пользователь: {{rep.author}}</h5>
+                        <p><i>{{ rep.time_reply }}</i></p>
+                        <p>{{ rep.text_reply }} </p>
+                </div>
+                {% elif rep.status == 0 %}
+                    {% if request.user == post.author %}
+                    <div class ='shadow-lg border-0 rounded-4 text-center'>
+                         <h5>Пользователь: {{rep.author}}</h5>
+                        <p><i>{{ rep.time_reply }}</i></p>
+                        <p>{{ rep.text_reply }} </p>
+                        <p><a class="btn btn-success" href="{% url 'response_accept' post_id=post.id reply_id=rep.id %}">Принять</a>
+                            <a class="btn btn-danger" href="{% url 'response_reject' post_id=post.id reply_id=rep.id %}">Отклонить</a></p>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+{% else %}
+
+        <p class="card-text">Откликов пока нет.</p>
+
+{% endif %}
+
+{% else %}
+У вас пока нет объявлений.
+{% endif %}
+
+{% endblock content %}
