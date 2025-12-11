@@ -17,6 +17,6 @@ app.conf.update(
 app.conf.beat_schedule = {
     'weekly-mailing' : {
         'task': 'mboard.tasks.subscribers_notification_weekly',
-        'schedule': crontab(hour = 14, minute=0, day_of_week='thu'),
+        'schedule': crontab(hour = 8, minute=0, day_of_week='mon'),
         }
 }
