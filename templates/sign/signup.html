@@ -5,8 +5,15 @@
 {% endblock title %}}
 
 {% block content %}
-<div class = "container mt-5 d-flex" width="300 px">
-<h4>Зарегистрироваться</h4>
+ {% if error %}
+    <h4>{{ error }}</h4>
+    <br>
+
+    {% endif %}
+
+<h4>Зарегистрироваться:</h4>
+    <br>
+    <div>
 <form method="post">
     {% csrf_token %}
     <p> <input type="text" name="username" placeholder="Username" required></p>
@@ -14,6 +21,6 @@
     <p><input type="password" name="password" placeholder="Password" required></p>
     <input class = "btn btn-success" type = "submit" value = "Подтвердить">
 </form>
-
 </div>
+
 {% endblock content %}

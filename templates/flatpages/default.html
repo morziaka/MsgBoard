@@ -45,13 +45,14 @@
                 <li class="nav-item">
                    <a class="nav-link" href="/replies/">Отклики</a>
                 </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'category_list' %}">Подписка</a>
+                </li>
 
                {% endif %}
 
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                   <a class="nav-link" href="{% url 'category_list' %}">Подписка</a>
-                </li>
+
                <li class="nav-item">
                    <a class="nav-link" href="{% url 'user_profile' %}">Профиль</a>
                 </li>

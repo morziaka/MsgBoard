@@ -5,6 +5,7 @@
 {% endblock title %}}
 
 {% block content %}
+    {% if is_confirmed %}
 <div class = "container mt-5 d-flex justify-content-center">
     <div>
 <h4>Страница авторизованного пользователя <br>
@@ -14,8 +15,13 @@
 
         <a href = "{% url 'post_create' %}" class = "btn btn-outline-primary mt-2">Добавить объявление</a>
 
-
 </div>
+    {% else %}
+<p>Вы не прошли верификацию, вам недоступны некоторые разделы сайта.</p>
+
+<p><a href = "{% url 'verify_code' user.id%}">Пройти верификацию</a></p>
+
+    {% endif %}
 
 </div>
 {% endblock content %}

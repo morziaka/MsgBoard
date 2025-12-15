@@ -8,33 +8,22 @@
 
 {% block content %}
   <h1>Все объявления</h1>
-
    <hr>
     {% if posts %}
-
-
         {% for post in posts %}
-    <div class = 'shadow-lg border-0 rounded-4 text-center'>
-
+            <div class = 'shadow-lg border-0 rounded-4 text-center'>
                <h2 class = "text-primary">{{ post.title }}</h2>
-
-
                <h3>Автор: {{post.author.username}}</h3>
-
                <p><i>{{post.time_post}}</i></p>
-
-             <p>{{ post.content|safe | truncatewords:50 }}</p>
-           <p><a href="{%url 'post_detail' post.id%}">Читать далее</a></p>
-        <br>
-
-
-    </div>
+               <p>{{ post.content|safe | truncatewords:50 }}</p>
+               <p><a href="{%url 'post_detail' post.id%}">Читать далее</a></p>
+                <br>
+            </div>
            {% endfor %}
-
-
    {% else %}
        <h2>Объявлений нет!</h2>
    {% endif %}
+
 {# Добавляем пагинацию на страницу #}
 
    {# Информация о предыдущих страницах #}
