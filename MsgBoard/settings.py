@@ -145,7 +145,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-LOGIN_URL = '/account/login/'
+LOGIN_URL = '/sign/login/'
 LOGIN_REDIRECT_URL = 'user_profile'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -159,6 +159,10 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 
 
 CELERY_BROKER_URL = 'redis://localhost:6379'

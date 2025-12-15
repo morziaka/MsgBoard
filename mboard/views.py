@@ -20,20 +20,20 @@ class PostsList(ListView):
     template_name = 'posts.html'
     context_object_name = 'posts'
     ordering = ['-time_post']
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         path_create = reverse_lazy('post_create')
         return create_or_edit(context, self.request.path)
 
-class Search(FilterView):
+class RepliesList(FilterView):
     model = Post
     template_name = 'replies.html'
     context_object_name = 'posts'
     filterset_class = PostFilter
     ordering = ['-time_post']
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -101,10 +101,11 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         return create_or_edit(context, self.request.path)
 
-class CategoryListView(LoginRequiredMixin, ListView):
+class CategoryListView(PermissionRequiredMixin, ListView):
     model = Category
     template_name = 'category_list.html'
     context_object_name = 'categories'
+    permission_required = 'mboard.add_post'
 
 @login_required
 def subscribe (request, pk):
