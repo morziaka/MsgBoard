@@ -21,19 +21,20 @@
 <h3>Отклики:</h3>
 
     {% if replies %}
-
+<h4>Выберите объявление.</h4>
+<br>
+    {% for post in posts %}
         {% for rep in replies %}
-            {% for post in posts %}
-            {% if rep.reply == post %}
-                {% if rep.status == 1 %}
-                <div class = 'shadow-lg border-0 rounded-4 text-center'  >
-                    <h5>Пользователь: {{rep.author}}</h5>
+                {% if rep.reply == post %}
+                    {% if rep.status == 1 %}
+                        <div class = 'shadow-lg border-0 rounded-4 text-center'  >
+                        <h5>Пользователь: {{rep.author}}</h5>
                         <p><i>{{ rep.time_reply }}</i></p>
                         <p>{{ rep.text_reply }} </p>
-                </div>
-                {% elif rep.status == 0 %}
-                    {% if request.user == post.author %}
-                    <div class ='shadow-lg border-0 rounded-4 text-center'>
+                        </div>
+                    {% elif rep.status == 0 %}
+                        {% if request.user == post.author %}
+                        <div class ='shadow-lg border-0 rounded-4 text-center'>
                          <h5>Пользователь: {{rep.author}}</h5>
                         <p><i>{{ rep.time_reply }}</i></p>
                         <p>{{ rep.text_reply }} </p>
