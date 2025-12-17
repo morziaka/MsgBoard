@@ -17,15 +17,15 @@
      </form>
 
 <br>
-<h5>Выберите объявление.</h5>
+
 <hr>
-<h3>Отклики:</h3>
 
-
-<br>
     {% if replies %}
+<h3>Отклики:</h3>
+{% if filterset.form.cleaned_data.title %}
 
     {% for post in posts %}
+
         {% for rep in replies %}
                 {% if rep.reply == post %}
                     {% if rep.status == 1 %}
@@ -42,13 +42,41 @@
                         <p>{{ rep.text_reply }} </p>
                         <p><a class="btn btn-success" href="{% url 'response_accept' post_id=post.id reply_id=rep.id %}">Принять</a>
                             <a class="btn btn-danger" href="{% url 'response_reject' post_id=post.id reply_id=rep.id %}">Отклонить</a></p>
-                    </div>
+                        </div>
                     {% endif %}
                 {% endif %}
             {% endif %}
             {% endfor %}
         {% endfor %}
 
+{% else %}
+
+<br>
+        {% for rep in replies %}
+
+                    {% if rep.status == 1 %}
+                        <div class = 'shadow-lg border-0 rounded-4 text-center'  >
+                        <h5>Пользователь: {{rep.author}}</h5>
+                        <p><i>{{ rep.time_reply }}</i></p>
+                        <p>{{ rep.text_reply }} </p>
+                        </div>
+                    {% elif rep.status == 0 %}
+
+                        <div class ='shadow-lg border-0 rounded-4 text-center'>
+                         <h5>Пользователь: {{rep.author}}</h5>
+                        <p><i>{{ rep.time_reply }}</i></p>
+                        <p>{{ rep.text_reply }} </p>
+                        <p><a class="btn btn-success" href="{% url 'response_accept' post_id=rep.reply.id reply_id=rep.id %}">Принять</a>
+                        <a class="btn btn-danger" href="{% url 'response_reject' post_id=rep.reply.id reply_id=rep.id %}">Отклонить</a></p>
+                </div>
+
+
+
+            {% endif %}
+        {% endfor %}
+
+
+{% endif %}
 {% else %}
 
         <p class="card-text">Откликов пока нет.</p>
