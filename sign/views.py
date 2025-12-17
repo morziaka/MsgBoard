@@ -60,7 +60,6 @@ def verify_code(request, user_id):
         confirmed_users = Group.objects.get(name='Confirmed')
 
         if code.is_expired():
-            print('expired')
             code.delete()
             email_otp = generate_otp()
             code = OneTimeCode.objects.create(receiver = user, email_otp = email_otp)
@@ -77,7 +76,7 @@ def verify_code(request, user_id):
 
             if verify_otp(email_otp, code.email_otp):
                 code.is_email_verified = True
-                code.email_otp = None
+                code.save(update_fields=["is_email_verified"])
                 if not user.groups.filter(name='Confirmed').exists():
                     user.groups.add(confirmed_users)
                 user.save()
