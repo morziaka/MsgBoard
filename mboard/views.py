@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
@@ -27,10 +26,11 @@ class PostsList(ListView):
         path_create = reverse_lazy('post_create')
         return create_or_edit(context, self.request.path)
 
-class RepliesList(FilterView):
+class RepliesList(PermissionRequiredMixin, FilterView):
     model = Post
     template_name = 'replies.html'
     context_object_name = 'posts'
+    permission_required = 'mboard.add_post'
     filterset_class = PostFilter
     ordering = ['-time_post']
     paginate_by = 5

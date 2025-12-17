@@ -7,7 +7,7 @@ from .models import Post, Reply
 
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=FroalaEditor(options={
-    'toolbarInline': False,
+    'toolbarInline': False, 'videoInsertButtons': [    'videoBack',     '|',     'videoByURL', 'videoEmbed'  ]
   }))
 
     class Meta:

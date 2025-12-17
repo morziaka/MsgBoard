@@ -1,7 +1,6 @@
-import django_filters
-from django import forms
+
 from django.contrib.auth.models import User
-from django_filters import FilterSet, CharFilter, ModelChoiceFilter
+from django_filters import FilterSet, ModelChoiceFilter
 from .models import Post
 
 def posts(request):

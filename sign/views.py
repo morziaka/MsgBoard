@@ -13,7 +13,6 @@ from django.conf import settings
 
 def register(request):
     if request.method == 'POST':
-
         try:
             username = request.POST['username']
             email = request.POST['email']
@@ -75,8 +74,6 @@ def verify_code(request, user_id):
         else:
 
             if verify_otp(email_otp, code.email_otp):
-                code.is_email_verified = True
-                code.save(update_fields=["is_email_verified"])
                 if not user.groups.filter(name='Confirmed').exists():
                     user.groups.add(confirmed_users)
                 user.save()
