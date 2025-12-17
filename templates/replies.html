@@ -17,12 +17,14 @@
      </form>
 
 <br>
+<h5>Выберите объявление.</h5>
 <hr>
 <h3>Отклики:</h3>
 
-    {% if replies %}
-<h4>Выберите объявление.</h4>
+
 <br>
+    {% if replies %}
+
     {% for post in posts %}
         {% for rep in replies %}
                 {% if rep.reply == post %}
